@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: documentdb
+  namespace: aks-store
+spec:
+  serviceName: documentdb
+  replicas: 1
+  selector:
+    matchLabels:
+      app: documentdb
+  template:
+    metadata:
+      labels:
+        app: documentdb
+    spec:
+      containers:
+        - name: documentdb
+          image: ghcr.io/documentdb/documentdb/documentdb-local:pg17-0.112.0
+          args:
+            - "--username"
+            - "username"
+            - "--password"
+            - "password"
+          ports:
+            - containerPort: 10260
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: documentdb
+  namespace: aks-store
+spec:
+  selector:
+    app: documentdb
+  ports:
+    - port: 10260

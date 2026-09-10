@@ -1,0 +1,5 @@
+order-service:
+  replicas: 3
+
+product-service:
+  replicas: 3

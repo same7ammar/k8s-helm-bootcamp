@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-service-configs
+  namespace: aks-store
+data:
+  ORDER_QUEUE_HOSTNAME: "rabbitmq"
+  ORDER_QUEUE_PORT: "5672"
+  ORDER_QUEUE_NAME: "orders"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: order-service-secrets
+  namespace: aks-store
+data:
+  ORDER_QUEUE_USERNAME: dXNlcm5hbWU=
+  ORDER_QUEUE_PASSWORD: cGFzc3dvcmQ=
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: aks-store
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order-service
+          image: ghcr.io/azure-samples/aks-store-demo/order-service:2.2.0
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: order-service-configs
+            - secretRef:
+                name: order-service-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  namespace: aks-store
+spec:
+  selector:
+    app: order-service
+  ports:
+    - port: 3000
+      targetPort: 3000

@@ -1,0 +1,12 @@
+resources:
+  - 00-namespace.yaml
+  - 01-documentdb.yaml
+  - 02-rabbitmq.yaml
+  - 03-order-service.yaml
+  - 04-makeline-service.yaml
+  - 05-product-service.yaml
+  - 06-store-front.yaml
+  - 07-store-admin.yaml
+  - 08-virtual-customer.yaml
+  - 09-virtual-worker.yaml
+  # - 10-ai-service.yaml  # optional, requires OpenAI credentials
