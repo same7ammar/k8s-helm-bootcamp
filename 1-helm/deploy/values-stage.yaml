@@ -1,0 +1,15 @@
+replicaCount: 3
+image:
+  repository: nginx
+  tag: "1.25.4"
+greeting: "Hello from stage"
+features:
+  banner: true
+  darkmode: false
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 800m
+    memory: 512Mi

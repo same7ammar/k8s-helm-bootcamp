@@ -1,0 +1,14 @@
+replicaCount: 20
+image:
+  repository: nginx
+  tag: "1.25.4"
+greeting: "Hello from prod"
+features:
+  banner: true
+  darkmode: false
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 2Gi

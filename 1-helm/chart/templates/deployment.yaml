@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestbook
+  # namespace: lab-01-raw
+  labels:
+    app: guestbook
+    env: dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: guestbook
+  template:
+    metadata:
+      labels:
+        app: guestbook
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.25.4
+          ports:
+            - containerPort: 80
+          env:
+            - name: GREETING
+              value: "Hello from dev"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi

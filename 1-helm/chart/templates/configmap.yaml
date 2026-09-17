@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: guestbook-config
+  # namespace: lab-01-raw
+data:
+  app.properties: |
+    log.level=info
+    feature.banner=true
+    feature.darkmode=false
