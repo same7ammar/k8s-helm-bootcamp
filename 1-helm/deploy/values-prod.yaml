@@ -2,7 +2,7 @@ replicaCount: 20
 image:
   repository: nginx
   tag: "1.25.4"
-greeting: "Hello from prod"
+greeting: "Hello from dev"
 features:
   banner: true
   darkmode: false
@@ -11,4 +11,5 @@ resources:
     cpu: 50m
     memory: 64Mi
   limits:
-    memory: 2Gi
+    cpu: 200m
+    memory: 128Mi
